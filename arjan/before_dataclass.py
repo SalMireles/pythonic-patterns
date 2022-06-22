@@ -1,7 +1,7 @@
 import random
 import string
-from dataclasses import dataclass, field
 from enum import Enum, auto
+from typing import List
 
 
 def generate_vehicle_license() -> str:
@@ -28,14 +28,22 @@ class FuelType(Enum):
     ELECTRIC = auto()
 
 
-@dataclass(frozen=True)
 class Vehicle:
-    brand: str
-    model: str
-    color: str
-    license_plate: str
-    fuel_type: FuelType = FuelType.ELECTRIC
-    accessories: list[Accessory] = field(default_factory=lambda: [Accessory.AIRCO])
+    def __init__(
+        self,
+        brand: str,
+        model: str,
+        color: str,
+        license_plate: str,
+        fuel_type: FuelType = FuelType.ELECTRIC,
+        accessories: List[Accessory] = [],
+    ) -> None:
+        self.brand = brand
+        self.model = model
+        self.color = color
+        self.fuel_type = fuel_type
+        self.license_plate = license_plate
+        self.accessories = accessories
 
 
 def main() -> None:
