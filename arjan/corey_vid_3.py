@@ -61,19 +61,20 @@ class Employee:
         return True
 
 
-emp_1 = Employee("Corey", "Shafer", 50000)
-emp_2 = Employee("Test", "User", 60000)
-Employee.set_raise_amount(1.05)
-
-# alterantive constructor usage example
-emp_3_string = "Steve-Smith-30000"
-emp_3 = Employee.from_string(emp_3_string)
-
-# example of using the static method
-my_date = datetime.date(2017, 7, 10)
-print(Employee.is_workday(my_date))
-
 if __name__ == "__main__":
+    # setup
+    emp_1 = Employee("Corey", "Shafer", 50000)
+    emp_2 = Employee("Test", "User", 60000)
+    Employee.set_raise_amount(1.05)
+
+    # alterantive constructor usage example
+    emp_3_string = "Steve-Smith-30000"
+    emp_3 = Employee.from_string(emp_3_string)
+
+    # example of using the static method
+    my_date = datetime.date(2017, 7, 10)
+
+    print(Employee.is_workday(my_date))
     print(emp_1.raise_amount)
     print(emp_2.raise_amount)
     print(Employee.raise_amount)

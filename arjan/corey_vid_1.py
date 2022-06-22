@@ -16,10 +16,11 @@ class Employee:
         return f"{self.first} {self.last}"
 
 
-emp_1 = Employee("Corey", "Shafer", 50000)
-emp_2 = Employee("Test", "User", 60000)
-
 if __name__ == "__main__":
+    # setup
+    emp_1 = Employee("Corey", "Shafer", 50000)
+    emp_2 = Employee("Test", "User", 60000)
+
     print(emp_1.email)
     print(emp_2.full_name())
     print(

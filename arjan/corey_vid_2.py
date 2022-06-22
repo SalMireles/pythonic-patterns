@@ -41,10 +41,11 @@ class Employee:
         self.pay = int(self.pay * self.raise_amount)
 
 
-emp_1 = Employee("Corey", "Shafer", 50000)
-emp_2 = Employee("Test", "User", 60000)
-
 if __name__ == "__main__":
+    # setup
+    emp_1 = Employee("Corey", "Shafer", 50000)
+    emp_2 = Employee("Test", "User", 60000)
+
     print(emp_1.pay)
     print(emp_1.apply_raise())
     print(Employee.num_of_employees)

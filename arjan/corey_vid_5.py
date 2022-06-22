@@ -5,6 +5,22 @@ Special (Magic/Dunder) Methods.
 Notes:
 
 - Special methods to use within classes
+- changes how objects are printed or displayed
+- Format outputs using dunder methods
+- if no str dunder the repr dunder is used as fallback
+
+__len__ and __add__ are other examples of behavior that objects run when running
+len() or simply print (1 + 2)
+
+See the difference:
+
+<__main__.Employee object at 0x103497d30>
+
+vs
+
+Employee('Corey', 'Shafer', '50000')
+
+
 
 """
 
@@ -25,60 +41,17 @@ class Employee:
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
+    def __repr__(self):  # mainly used for debugging
+        return f"Employee('{self.first}', '{self.last}', '{self.pay}')"
 
-class Developer(Employee):
-    raise_amount = 1.10
-
-    def __init__(self, first, last, pay, prog_lang):
-        super().__init__(
-            first, last, pay
-        )  # lets the employee class set the first few self attributes
-        # Employee.__init__(self, first, last, pay) - equivalent but not as commonly used
-        self.prog_lang = prog_lang
-
-
-class Manager(Employee):
-    def __init__(
-        self, first, last, pay, employees=None
-    ):  # None because you don't want to pass mutable data types (list, dict, etc.)
-        super().__init__(
-            first, last, pay
-        )  # lets the employee class set the first few self attributes
-
-        # input of list of employees that the manager oversees
-        if employees is None:
-            self.employees = []
-        else:
-            self.employees = employees
-
-    def add_employee(self, emp):
-        if emp not in self.employees:
-            self.employees.append(emp)
-
-    def remove_employee(self, emp):
-        if emp in self.employees:
-            self.employees.remove(emp)
-
-    def print_employees(self):
-        for emp in self.employees:
-            print("-->", emp.full_name())
-
-
-dev_1 = Developer("Corey", "Shafer", 50000, "python")
-dev_2 = Developer("Test", "User", 60000, "java")
-
-# manager test
-mgr_1 = Manager("Sue", "Smith", 90000, [dev_1])
+    def __str__(self):  # readable output
+        return f"{self.full_name()} - {self.email}"
 
 
 if __name__ == "__main__":
-    print(dev_1.email)
-    print(dev_2.email)
-    print(dev_1.prog_lang)
-    # print(help(Developer))
-    # managers
-    print(mgr_1.email)
-    mgr_1.add_employee(dev_1)
-    mgr_1.print_employees()
-    mgr_1.add_employee(dev_2)
-    mgr_1.print_employees()
+    emp_1 = Employee("Corey", "Shafer", 50000)
+    emp_2 = Employee("Test", "User", 60000)
+    print(emp_1)  # defaults to printing str dunder
+    print(repr(emp_1))  # or print(emp_1.__repr__())
+    print(str(emp_1))
+    print(emp_1.apply_raise())

@@ -112,14 +112,13 @@ class Manager(Employee):
             print("-->", emp.full_name())
 
 
-dev_1 = Developer("Corey", "Shafer", 50000, "python")
-dev_2 = Developer("Test", "User", 60000, "java")
-
-# manager test
-mgr_1 = Manager("Sue", "Smith", 90000, [dev_1])
-
-
 if __name__ == "__main__":
+    # setup
+    dev_1 = Developer("Corey", "Shafer", 50000, "python")
+    dev_2 = Developer("Test", "User", 60000, "java")
+    # manager test
+    mgr_1 = Manager("Sue", "Smith", 90000, [dev_1])
+
     print(dev_1.email)
     print(dev_2.email)
     print(dev_1.prog_lang)
