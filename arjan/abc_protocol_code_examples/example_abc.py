@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 class Vehicle(ABC):
-    @abstractmethod
+    @abstractmethod  # enforces that you can't make an instance of vehicle
     def reserve(self, start_date: datetime, days: int):
         """A vehicle can be reserved for renting"""
 
@@ -45,7 +45,9 @@ class Truck(Vehicle):
         print(f"Renewing license of truck {self.model} to {new_license_date}.")
 
 
+# not in the dataclass
 def reserve_now(vehicle: Vehicle):
+    # each vehicle has it's own implementation of the reserve method
     vehicle.reserve(datetime.now(), 40)
 
 
