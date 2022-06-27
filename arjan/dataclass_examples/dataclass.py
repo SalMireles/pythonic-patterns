@@ -2,7 +2,6 @@ import random
 import string
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import List
 
 
 def generate_vehicle_license() -> str:
@@ -46,7 +45,7 @@ class Vehicle:
     # def default_foo():
     # return [Accessory.AIRCO]
     # default_factory=default_foo
-    accessories: List[Accessory] = field(
+    accessories: list[Accessory] = field(
         default_factory=lambda: [Accessory.AIRCO, Accessory.NAVIGATION]
     )
 
