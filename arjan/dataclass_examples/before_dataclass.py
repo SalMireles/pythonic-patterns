@@ -1,7 +1,6 @@
 import random
 import string
 from enum import Enum, auto
-from typing import List
 
 
 def generate_vehicle_license() -> str:
@@ -36,7 +35,7 @@ class Vehicle:
         color: str,
         license_plate: str,
         fuel_type: FuelType = FuelType.ELECTRIC,
-        accessories: List[Accessory] = [],
+        accessories: list[Accessory] = [],
     ) -> None:
         self.brand = brand
         self.model = model

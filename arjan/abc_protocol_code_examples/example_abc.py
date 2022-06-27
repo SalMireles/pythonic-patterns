@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 class Vehicle(ABC):
-    @abstractmethod  # enforces that you can't make an instance of vehicle
+    @abstractmethod  # enforces that you can't make an instance of vehicle without a reserve method
     def reserve(self, start_date: datetime, days: int):
         """A vehicle can be reserved for renting"""
 
