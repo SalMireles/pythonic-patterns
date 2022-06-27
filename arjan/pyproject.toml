@@ -5,7 +5,7 @@ description = ""
 authors = ["Salmireles <sal.chemicale@gmail.com>"]
 
 [tool.poetry.dependencies]
-# Required installs on mac https://github.com/uiri/toml/issues/77 to have po
+# Required installs on mac https://github.com/uiri/toml/issues/77
 python = "==3.10.0"
 
 [tool.poetry.dev-dependencies]
