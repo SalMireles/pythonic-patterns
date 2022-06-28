@@ -1,3 +1,12 @@
+"""
+Issues:
+- rental contract has a lot of customer info
+- the total price method need to know implementation details of the rental contract
+-- specifically, rental.days and rental.additional_km
+
+"""
+
+
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum, auto
