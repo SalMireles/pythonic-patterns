@@ -1,3 +1,9 @@
+"""
+- See solution on how to decouple total price even further.
+"""
+
+from dataclasses import dataclass, field
+
 from enum import Enum, auto
 
 
@@ -8,31 +14,34 @@ class PaymentStatus(Enum):
     PAID = auto()
 
 
-class Order:
-    def __init__(self):
-        self.items: list[str] = []
-        self.quantities: list[int] = []
-        self.prices: list[int] = []
-        self.status: str = "open"
+@dataclass
+class ItemInfo:
+    items: str
+    quantities: int
+    prices: int
 
-    def add_item(self, name: str, quantity: int, price: int) -> None:
-        self.items.append(name)
-        self.quantities.append(quantity)
-        self.prices.append(price)
+
+@dataclass
+class Order:
+    items: list[ItemInfo] = field(default_factory=list)
+    status: PaymentStatus = PaymentStatus.OPEN
+
+    def add_item(self, item: ItemInfo) -> None:
+        self.items.append(item)
 
     @property
     def total_price(self) -> int:
         total = 0
-        for i in range(len(self.prices)):
-            total += self.quantities[i] * self.prices[i]
+        for i in range(len(self.items)):
+            total += self.items[i].quantities * self.items[i].prices
         return total
 
 
 def main() -> None:
     order = Order()
-    order.add_item("Keyboard", 1, 5000)
-    order.add_item("SSD", 1, 15000)
-    order.add_item("USB cable", 2, 500)
+    order.add_item(ItemInfo("Keyboard", 1, 5000))
+    order.add_item(ItemInfo("SSD", 1, 15000))
+    order.add_item(ItemInfo("USB cable", 2, 500))
 
     print(f"The total price is: ${(order.total_price / 100):.2f}.")
 

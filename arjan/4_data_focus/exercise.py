@@ -1,3 +1,14 @@
+"""
+Goal:
+- Refactor to center behavior around the data.
+- Get rid of lists
+
+Approach:
+- break out item price from the order class
+
+"""
+
+
 from enum import Enum, auto
 
 
