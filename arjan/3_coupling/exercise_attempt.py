@@ -1,4 +1,7 @@
 """
+CODE NOT WORKING - Incomplete after 1 hr.
+
+
 Notes:
 - We have a dictionary that relies on a data class to create 3 Vehicle data instances
 then we rely on the the dictionary to check if the keys are valid. If valid we pass
@@ -10,24 +13,58 @@ compute_rental_cost() should be a method
 
 - Current thought is to create an enum class and use this  
 
+- Ooh how about a method to add the data to the class and the class can
+contain the methods that rely on the data. Use an alternative constructor via
+a classmethod (something cool I learned recently.)
+
+- Outcome: Spend ~1hr and didn't land on a solution so proceeding so will proceed.
+
+- My solution was to add the vehicle data to a dataclass then was going to use 
+that to perform operations. This seemed way too nested.
+
+- Lesson: For some reason I tried to redifine the dictionary and that spiraled
+out of control. The apprach was to still use it but pass it in as an arg
+where needed and to move change functions that related to a class as a method.
+
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from enum import Enum
+
+
+class VehicleBrands(Enum):
+    VW = "vw"
+    BMW = "bmw"
+    FORD = "ford"
+
+
+VEHICLE_DATA = {
+    VehicleBrands.VW: {"price_per_km": 30, "price_per_day": 6000},
+    VehicleBrands.BMW: {"price_per_km": 35, "price_per_day": 8500},
+    VehicleBrands.FORD: {"price_per_km": 25, "price_per_day": 12000},
+}
 
 
 @dataclass
 class VehicleData:
     """A class to hold vehicle data."""
 
-    brand: str
     price_per_day: int
     price_per_km: int
+    brand: str = None
+    days_rented: int = None
+    km_driven: int = None
 
 
-VEHICLE_DATA = {
-    "vw": VehicleData(brand="vw", price_per_km=30, price_per_day=6000),
-    "bmw": VehicleData(brand="bmw", price_per_km=35, price_per_day=8500),
-    "ford": VehicleData(brand="ford", price_per_km=25, price_per_day=12000),
-}
+@dataclass
+class VehicleDatabase:
+    "A class to hold all vehicle data"
+    km_price: dict[str, int] = field(default_factory=dict)
+    daily_price: dict[str, int] = field(default_factory=dict)
+
+    def add_vehicle_data(self, vehicle_dict):
+        for key, values in vehicle_dict.items():
+            self.km_price[key].append(values.get("price_per_km"))
+            self.daily_price[key].append(values.get("price_per_day"))
 
 
 def read_vehicle_type() -> str:
@@ -66,15 +103,6 @@ def read_kms_to_drive() -> int:
         except ValueError:
             print("Invalid input. Please enter a number.")
     return km
-
-
-def compute_rental_cost(vehicle_type: str, days: int, km: int) -> int:
-    """Computes the rental cost for a vehicle."""
-    vehicle_data = VEHICLE_DATA[vehicle_type]
-    price_per_km = vehicle_data.price_per_km
-    price_per_day = vehicle_data.price_per_day
-    paid_kms = max(km - 100, 0)
-    return price_per_km * paid_kms + price_per_day * days
 
 
 def main():

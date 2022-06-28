@@ -16,13 +16,6 @@ class VehicleData:
         return self.price_per_km * paid_kms + self.price_per_day * days
 
 
-VEHICLE_DATA = {
-    "vw": VehicleData(brand="vw", price_per_km=30, price_per_day=6000),
-    "bmw": VehicleData(brand="bmw", price_per_km=35, price_per_day=8500),
-    "ford": VehicleData(brand="ford", price_per_km=25, price_per_day=12000),
-}
-
-
 def read_vehicle_type(vehicle_types: list[str]) -> str:
     """Reads the vehicle type from the user."""
     vehicle_type = ""
@@ -63,14 +56,20 @@ def read_kms_to_drive() -> int:
 
 def main():
 
-    vehicle_type = read_vehicle_type(list(VEHICLE_DATA.keys()))
+    all_vehicle_data = {
+        "vw": VehicleData(brand="vw", price_per_km=30, price_per_day=6000),
+        "bmw": VehicleData(brand="bmw", price_per_km=35, price_per_day=8500),
+        "ford": VehicleData(brand="ford", price_per_km=25, price_per_day=12000),
+    }
+
+    vehicle_type = read_vehicle_type(list(all_vehicle_data.keys()))
 
     days = read_rent_days()
 
     km = read_kms_to_drive()
 
     # retrieve the vehicle data from the dictionary
-    vehicle_data = VEHICLE_DATA[vehicle_type]
+    vehicle_data = all_vehicle_data[vehicle_type]
 
     # compute the final rental price
     rental_price = vehicle_data.compute_rental_cost(days, km)
