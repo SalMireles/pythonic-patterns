@@ -1,3 +1,10 @@
+""" Implementation of trading bot with protocols instead of ABC.
+
+Notice that the exchange connection is happening at the subclass level (duplication),
+but we completely got rid of inheritance.
+
+Interesting: Also had to switch to a dataclass with arg of type Exchange.
+"""
 from avg_trading_bot import AverageTradingBot
 from coinbase import Coinbase
 
