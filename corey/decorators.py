@@ -19,6 +19,7 @@ def timeit(func):
         start_time = time.perf_counter()
         func(*args, **kwargs)
         total_time = time.perf_counter() - start_time
+        return total_time
         print(f"Finished {func.__name__!r} in {total_time:.2f} seconds")
 
     return time_eval
