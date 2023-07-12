@@ -1,5 +1,5 @@
 # Learning Resouces
-Collection of OOP pythonic patters. The following patterns are demonstrated within `pythonic_patterns/`:
+Collection of OOP pythonic patterns. The following patterns are demonstrated within `pythonic_patterns/`:
 * Abstract Pattern
 * Bridge Pattern
 * Notification Pattern
