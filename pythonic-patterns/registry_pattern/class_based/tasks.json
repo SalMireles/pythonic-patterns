@@ -1,0 +1,17 @@
+{
+  "tasks": [
+    {
+      "type": "pulse",
+      "strength": 190
+    },
+    {
+      "type": "recalibrate",
+      "target": "Thoron subspace transponder"
+    },
+    {
+      "type": "reinforce",
+      "plating_type": "biogenic",
+      "target": "the deflector array"
+    }
+  ]
+}
